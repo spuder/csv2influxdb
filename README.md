@@ -45,17 +45,17 @@ Outputs json with influxdb table headers (name,columns,points)
     ],
     "points": [
         [
-            "2004",
+            "2014",
             "67",
             "60"
         ],
         [
-            "2005",
+            "2015",
             "51",
             "55"
         ],
         [
-            "2006",
+            "2016",
             "42",
             "45"
         ]
@@ -72,7 +72,7 @@ Outputs json with influxdb table headers (name,columns,points)
 
 #####From CSV file, to JSON file
 
-    csv2influxdb.rb -d derp -i murders.csv -o /tmp/influxdb_murders.json
+    csv2influxdb -d derp -i murders.csv -o /tmp/influxdb_murders.json
 
 #####Use  stdin -> stdout
 ```
@@ -86,7 +86,7 @@ Obviously the stdin/stdout option won't work well for large amounts of data
 
 #####Pretty
 
-    csv2influxdb.rb -p -d derp -i murders.csv -o /tmp/influxdb_murders.json
+    csv2influxdb -p -d derp -i foo.csv -o /tmp/bar.json
 
 Avoid using `-p` unnecessarily since it wastes network bandwidth
 
@@ -101,11 +101,9 @@ Avoid using `-p` unnecessarily since it wastes network bandwidth
 
 There are plently of online csv to json converters, why not just use that one? 
 
-I tried all the online converters ([this is the best one](http://www.convertcsv.com/csv-to-json.htm)), but none of them could quite convert csv's into json that was compatible with influxdb. (no column headers, no json with multiple keys)
+I tried all the online converters ([this is the best one](http://www.convertcsv.com/csv-to-json.htm)), but none of them could quite convert a csv into json that was compatible with influxdb. (no column headers, no json with multiple keys)
 
 
-
-    {"name":"murders","columns":["year","internet-explorer-usage","murders-per-capita"],"points":[["2004","67","60"],["2005","51","55"],["2006","42","45"]]}
 
 ###Legal
 csv2influxdb is created by spuder, a fan of influxdb. It comes with no guarantee. It is a community project and is not supported nor afiliated with the creators of [influxdb](http://influxdb.com/).  
