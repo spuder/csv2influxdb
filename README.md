@@ -5,37 +5,42 @@ Converts a CSV file into json for influxdb
 
 # Usage
 
-Takes 3 parameters
+Pass in `--help` for full options
 
- - database name
- - Input file (csv)
- - Output file (json
- 
-    csv2influxdb foo example.csv bar.json
+    -d, --database      Influxdb database name (Required)
+    -i, --in            CSV filename to read in
+    -o, --out           JSON filename to output to 
+    -p, --pretty        Output pretty formatted json
+    -v, --version       Shows version
+    -h, --help          Display this help message.
+   
+# Installation
+
+    gem install csv2influxdb
+    
+Tested on ruby 2.0.0, if you encounter issues with older versions, please open a github issue
     
 # What it does
 
 Takes a csv:
 
-"year","internet_explorer_usage","murders_per_capita"
-2004,67,60
-2005,51,55
-2006,42,45
+|year|internet-explorer-usage|murders-per-capita|
+|----|-----|----|
+|2014|67|60|
+|2015|51|55|
+|2016|42|45|
 
-Outputs json with the 3 keys needed by influx (name,columns,points)
 
 
-    {"name":"murders","columns":["year","internet_explorer_usage","murders_per_capita"],"points":[["2004","67","60"],["2005","51","55"],["2006","42","45"]]}
-
-Or a pretty option
+Outputs json with influxdb table headers (name,columns,points)
 
 ```
 {
     "name": "murders",
     "columns": [
         "year",
-        "internet_explorer_usage",
-        "murders_per_capita"
+        "internet-explorer-usage",
+        "murders-per-capita"
     ],
     "points": [
         [
@@ -57,4 +62,49 @@ Or a pretty option
 }
 ```
 
+
+
+#Examples
+
+
+
+
+#####From CSV file, to JSON file
+
+    csv2influxdb.rb -d derp -i murders.csv -o /tmp/influxdb_murders.json
+
+#####Use  stdin -> stdout
+```
+echo '"year","internet_explorer_usage","murders_per_capita"
+2004,67,60
+2005,51,55
+2006,42,45' | csv2influxdb -d derp
+{"name":"derp","columns":["year","internet_explorer_usage","murders_per_capita"],"points":[["2004","67","60"],["2005","51","55"],["2006","42","45"]]}
+```
+Obviously the stdin/stdout option won't work well for large amounts of data
+
+#####Pretty
+
+    csv2influxdb.rb -p -d derp -i murders.csv -o /tmp/influxdb_murders.json
+
+Avoid using the `-p` option since it wastes network bandwidth
+
+
+# Migrating Data
+
+- Export data from your relational database to csv. 
+- Use `csv2influxdb` to convert to json
+- Use a tool like [influxdb-backup](https://github.com/eckardt/influxdb-backup) to import to influxdb
+
 # Why
+
+There are plently of online csv to json converters, why not just use that one? 
+
+I tried all the online converters ([this is the best one](http://www.convertcsv.com/csv-to-json.htm)), but none of them could quite convert csv's into json that was compatible with influxdb. (no column headers, no json with multiple keys)
+
+
+
+    {"name":"murders","columns":["year","internet-explorer-usage","murders-per-capita"],"points":[["2004","67","60"],["2005","51","55"],["2006","42","45"]]}
+
+###Legal
+csv2influxdb is created by spuder, a fan of influxdb. It comes with no guarantee. It is a community project and is not supported nor afiliated with the creators of [influxdb](http://influxdb.com/).  
