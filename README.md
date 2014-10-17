@@ -1,9 +1,11 @@
+
 csv2influxdb
 ============
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/spuder/csv2influxdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Converts a CSV file into json for influxdb
+Converts a CSV file into JSON for [influxdb](http://influxdb.com/)
 
-# Usage
+## Usage
 
 Pass in `--help` for full options
 
@@ -11,16 +13,15 @@ Pass in `--help` for full options
     -i, --in            CSV filename to read in
     -o, --out           JSON filename to output to 
     -p, --pretty        Output pretty formatted json
-    -v, --version       Shows version
     -h, --help          Display this help message.
-   
-# Installation
+
+## Installation
 
     gem install csv2influxdb
     
 Tested on ruby 2.0.0, if you encounter issues with older versions, please open a github issue
-    
-# What it does
+
+## What it does
 
 Takes a csv:
 
@@ -64,7 +65,7 @@ Outputs json with influxdb table headers (name,columns,points)
 
 
 
-#Examples
+## Examples
 
 
 
@@ -87,16 +88,16 @@ Obviously the stdin/stdout option won't work well for large amounts of data
 
     csv2influxdb.rb -p -d derp -i murders.csv -o /tmp/influxdb_murders.json
 
-Avoid using the `-p` option since it wastes network bandwidth
+Avoid using `-p` unnecessarily since it wastes network bandwidth
 
 
-# Migrating Data
+## Migrating Data
 
 - Export data from your relational database to csv. 
-- Use `csv2influxdb` to convert to json
-- Use a tool like [influxdb-backup](https://github.com/eckardt/influxdb-backup) to import to influxdb
+- Use `csv2influxdb`to convert to json
+- Use a tool like [influxdb-backup](https://github.com/eckardt/influxdb-backup) to import push to influxdb
 
-# Why
+## Why
 
 There are plently of online csv to json converters, why not just use that one? 
 
