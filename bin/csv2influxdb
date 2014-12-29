@@ -20,7 +20,7 @@ end
 name = opts["database"]
 
 if opts.in?
-    @points = CSV.open(opts[:in]).readlines #Save CSV file to array
+    @points = CSV.open(opts[:in],{:converters=>:integer}).readlines #Save CSV file to array
     columns = @points.delete @points.first.to_a #Save CSV headers, then delete from CSV object
 else
     #When user passes in from stdin, there are extra characters like '\n', remove them
