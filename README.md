@@ -19,7 +19,12 @@ Pass in `--help` for full options
 
     gem install csv2influxdb
     
-Tested on ruby 2.0.0, if you encounter issues with older versions, please open a github issue
+or
+
+    git clone https://github.com/spuder/csv2influxdb.git
+    bundle install
+    
+Tested with ruby 2.0.0 on OSX, if you encounter issues with any other versions, please open a github issue
 
 ## What it does
 
